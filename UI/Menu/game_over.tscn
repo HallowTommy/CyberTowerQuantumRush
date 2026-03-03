@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://cxd8uqxq4mxsq"]
+
+[ext_resource type="Script" uid="uid://c6tf4pkx0nef6" path="res://UI/Menu/game_over.gd" id="1_xy1b1"]
+[ext_resource type="Shader" uid="uid://2x3ov3cq1n6r" path="res://UI/Settings/panning.gdshader" id="2_cu8oh"]
+[ext_resource type="Texture2D" uid="uid://bk0hm6sblk5j5" path="res://Main/TowerTextures/BG.png" id="3_yduli"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="4_ledyj"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="5_igqns"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="6_b5bax"]
+[ext_resource type="PackedScene" uid="uid://fwkonvffjddf" path="res://UI/money_label.tscn" id="7_cu8oh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbi62"]
+shader = ExtResource("2_cu8oh")
+shader_parameter/direction = Vector2(0.5, 0.5)
+shader_parameter/speed = 0.5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndc3l"]
+texture = ExtResource("5_igqns")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh7wq"]
+texture = ExtResource("6_b5bax")
+
+[node name="GameOver" type="Control" unique_id=721595151]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xy1b1")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=2050033792]
+material = SubResource("ShaderMaterial_wbi62")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_yduli")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect" unique_id=41669225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 175
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 175
+theme_override_constants/margin_bottom = 250
+
+[node name="Container" type="VBoxContainer" parent="ColorRect/MarginContainer" unique_id=1196508233]
+layout_mode = 2
+theme_override_constants/separation = 33
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/Container" unique_id=769494209]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 59
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=1504274134]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "High Score "
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=1883497033]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "123123"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=51915190]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "Score"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=919497914]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "123123"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=1201517625]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "Coins"
+horizontal_alignment = 1
+
+[node name="Coins" type="Label" parent="ColorRect/MarginContainer/Container/VBoxContainer" unique_id=1240181253]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 75
+text = "132123"
+horizontal_alignment = 1
+
+[node name="Retry" type="Button" parent="ColorRect/MarginContainer/Container" unique_id=250397640]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 73
+theme_override_styles/normal = SubResource("StyleBoxTexture_ndc3l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fh7wq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ndc3l")
+text = "Retry"
+
+[node name="Menu" type="Button" parent="ColorRect/MarginContainer/Container" unique_id=205001558]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ledyj")
+theme_override_font_sizes/font_size = 73
+theme_override_styles/normal = SubResource("StyleBoxTexture_ndc3l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fh7wq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ndc3l")
+text = "Main Menu"
+
+[node name="MoneyLabel" parent="." unique_id=1469629930 instance=ExtResource("7_cu8oh")]
+layout_mode = 1
+
+[connection signal="pressed" from="ColorRect/MarginContainer/Container/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/Container/Menu" to="." method="_on_menu_pressed"]

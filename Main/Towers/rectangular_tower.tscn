@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ct184jov2bdg2"]
+
+[ext_resource type="Script" uid="uid://ciovjpx1j7kxu" path="res://Main/Pendulum/tower.gd" id="1_sb4w2"]
+[ext_resource type="Texture2D" uid="uid://dr63ic0xn1kv5" path="res://Main/TowerTextures/Long.png" id="2_5h225"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u642j"]
+size = Vector2(384, 175)
+
+[node name="Tower" type="CharacterBody2D" unique_id=1458372492 groups=["Stackable"]]
+script = ExtResource("1_sb4w2")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2137175175]
+position = Vector2(0, 87.5)
+shape = SubResource("RectangleShape2D_u642j")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1096026997]
+visible = false
+offset_left = -125.0
+offset_right = 128.0
+offset_bottom = 250.0
+
+[node name="67" type="Sprite2D" parent="." unique_id=148064208]
+position = Vector2(-1, 79)
+scale = Vector2(0.355, 0.355)
+texture = ExtResource("2_5h225")

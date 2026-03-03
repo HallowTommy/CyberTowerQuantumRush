@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://4gg0g43ta5cx"]
+
+[ext_resource type="Shader" uid="uid://2x3ov3cq1n6r" path="res://UI/Settings/panning.gdshader" id="1_6ukun"]
+[ext_resource type="Script" uid="uid://dm84v18mx02h4" path="res://UI/Settings/settings.gd" id="1_jjy6o"]
+[ext_resource type="Texture2D" uid="uid://bk0hm6sblk5j5" path="res://Main/TowerTextures/BG.png" id="2_yuh4y"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="4_eeom4"]
+[ext_resource type="Texture2D" uid="uid://prt38t2edsco" path="res://Main/TowerTextures/IconAudio.png" id="5_4ang8"]
+[ext_resource type="Texture2D" uid="uid://bt6xqr7yt200c" path="res://Main/TowerTextures/grabber.png" id="5_hfoeg"]
+[ext_resource type="Texture2D" uid="uid://cdnning1nrs7u" path="res://Main/TowerTextures/button_unchecked.png" id="6_qx4ph"]
+[ext_resource type="Texture2D" uid="uid://cqmecm728edi0" path="res://Main/TowerTextures/button_checked.png" id="7_van1q"]
+[ext_resource type="Texture2D" uid="uid://b4w5rejrvvafl" path="res://Main/TowerTextures/IconVibration.png" id="8_kmpgn"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="10_van1q"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="11_kmpgn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eeom4"]
+shader = ExtResource("1_6ukun")
+shader_parameter/direction = Vector2(0.5, 0.5)
+shader_parameter/speed = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnv0n"]
+bg_color = Color(0.08929443, 0.4755726, 0.81640625, 1)
+border_width_bottom = 10
+border_color = Color(0.03988266, 0.020751953, 0.265625, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3ito"]
+bg_color = Color(0.3068142, 0.047302246, 0.484375, 1)
+border_width_bottom = 10
+border_color = Color(0.18696952, 0.014190674, 0.2421875, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nucuk"]
+texture = ExtResource("10_van1q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4p0f4"]
+texture = ExtResource("11_kmpgn")
+
+[node name="Settings" type="Control" unique_id=978255378]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1287958816]
+material = SubResource("ShaderMaterial_eeom4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yuh4y")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1545020916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 175
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 175
+theme_override_constants/margin_bottom = 250
+
+[node name="Settings" type="VBoxContainer" parent="MarginContainer" unique_id=176661647]
+layout_mode = 2
+theme_override_constants/separation = 88
+script = ExtResource("1_jjy6o")
+
+[node name="SettingsLabel" type="Label" parent="MarginContainer/Settings" unique_id=920599890]
+layout_mode = 2
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("4_eeom4")
+theme_override_font_sizes/font_size = 88
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="CheckBoxes" type="HBoxContainer" parent="MarginContainer/Settings" unique_id=491713052]
+layout_mode = 2
+theme_override_constants/separation = 295
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/Settings/CheckBoxes" unique_id=557038876]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Settings/CheckBoxes/VBoxContainer" unique_id=216881231]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_4ang8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Audio" type="CheckBox" parent="MarginContainer/Settings/CheckBoxes/VBoxContainer" unique_id=1122134609]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_icons/checked = ExtResource("7_van1q")
+theme_override_icons/unchecked = ExtResource("6_qx4ph")
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/Settings/CheckBoxes" unique_id=1575290163]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Settings/CheckBoxes/VBoxContainer2" unique_id=158662917]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_kmpgn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Vibration" type="CheckBox" parent="MarginContainer/Settings/CheckBoxes/VBoxContainer2" unique_id=177342225]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_icons/checked = ExtResource("7_van1q")
+theme_override_icons/unchecked = ExtResource("6_qx4ph")
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/Settings" unique_id=759789354]
+layout_mode = 2
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("4_eeom4")
+theme_override_font_sizes/font_size = 46
+text = "SFX"
+
+[node name="SFX" type="HSlider" parent="MarginContainer/Settings" unique_id=3983026]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("5_hfoeg")
+theme_override_icons/grabber_highlight = ExtResource("5_hfoeg")
+theme_override_icons/grabber_disabled = ExtResource("5_hfoeg")
+theme_override_styles/slider = SubResource("StyleBoxFlat_wnv0n")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_v3ito")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_v3ito")
+value = 50.0
+
+[node name="BGMLabel" type="Label" parent="MarginContainer/Settings" unique_id=19616544]
+layout_mode = 2
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("4_eeom4")
+theme_override_font_sizes/font_size = 46
+text = "BGM"
+
+[node name="BGM" type="HSlider" parent="MarginContainer/Settings" unique_id=1622946302]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("5_hfoeg")
+theme_override_icons/grabber_highlight = ExtResource("5_hfoeg")
+theme_override_icons/grabber_disabled = ExtResource("5_hfoeg")
+theme_override_styles/slider = SubResource("StyleBoxFlat_wnv0n")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_v3ito")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_v3ito")
+value = 50.0
+
+[node name="Back" type="Button" parent="MarginContainer/Settings" unique_id=1302226303]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("4_eeom4")
+theme_override_font_sizes/font_size = 76
+theme_override_styles/normal = SubResource("StyleBoxTexture_nucuk")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4p0f4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nucuk")
+text = "Back"
+
+[connection signal="toggled" from="MarginContainer/Settings/CheckBoxes/VBoxContainer/Audio" to="MarginContainer/Settings" method="_mute_toggled"]
+[connection signal="toggled" from="MarginContainer/Settings/CheckBoxes/VBoxContainer2/Vibration" to="MarginContainer/Settings" method="_vibration_toggled"]
+[connection signal="value_changed" from="MarginContainer/Settings/SFX" to="MarginContainer/Settings" method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="MarginContainer/Settings/BGM" to="MarginContainer/Settings" method="_on_bgm_value_changed"]
+[connection signal="pressed" from="MarginContainer/Settings/Back" to="MarginContainer/Settings" method="_on_back_pressed"]

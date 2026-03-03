@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Rod" format=3 uid="uid://cbgw2sfnqfd7y"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_ic0bp"]
+
+[resource]
+script = ExtResource("1_ic0bp")
+item_name = "Ice Rod"
+cost = 10000
+luck = 1.0
+info = "[color=#1E90FF]Blue[/color]            25%
+[color=#FFA500]Orange[/color]       45%
+[color=#FF0000]Red[/color]              30%
+"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

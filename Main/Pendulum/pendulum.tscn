@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://i7j380amevdh"]
+
+[ext_resource type="Script" uid="uid://b04mowqjluqn7" path="res://Main/Pendulum/pendulum.gd" id="1_ts572"]
+[ext_resource type="Script" uid="uid://drnbwgdq6sa1d" path="res://Main/Pendulum/camera.gd" id="3_revod"]
+[ext_resource type="Script" uid="uid://dswbtbevoby4k" path="res://Main/Pendulum/rope.gd" id="3_uxaci"]
+[ext_resource type="Texture2D" uid="uid://d6apgom7wahe" path="res://Main/TowerTextures/Magnet.png" id="5_7m1hf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0p0il"]
+size = Vector2(1288, 302)
+
+[node name="Pendulum" type="Node2D" unique_id=296680403]
+script = ExtResource("1_ts572")
+
+[node name="Towers" type="Node2D" parent="." unique_id=932585015]
+top_level = true
+
+[node name="CD" type="Timer" parent="." unique_id=1998934193]
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1563656192]
+process_mode = 3
+script = ExtResource("3_revod")
+max_offset = 75.0
+max_rotation = 3.0
+
+[node name="Rope" type="Line2D" parent="Camera" unique_id=1121884145]
+unique_name_in_owner = true
+position = Vector2(0, -1100)
+points = PackedVector2Array(0, 0, 0, 600)
+default_color = Color(0, 0, 0, 1)
+texture_mode = 2
+script = ExtResource("3_uxaci")
+length = 800.0
+
+[node name="Deletor" type="Area2D" parent="." unique_id=303186206]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deletor" unique_id=1897752366]
+position = Vector2(0, 1459)
+shape = SubResource("RectangleShape2D_0p0il")
+
+[node name="Hook" type="Sprite2D" parent="." unique_id=48424016]
+z_index = 2
+position = Vector2(0, -535)
+scale = Vector2(0.447, 0.447)
+texture = ExtResource("5_7m1hf")
+offset = Vector2(0, -46.97998)
+
+[connection signal="timeout" from="CD" to="." method="_on_cd_timeout"]
+[connection signal="body_entered" from="Deletor" to="." method="_on_deletor_body_entered"]

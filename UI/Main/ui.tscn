@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://dub6g7cchlyma"]
+
+[ext_resource type="Script" uid="uid://dtjb6fqdiwe45" path="res://UI/Main/ui.gd" id="1_7r5ee"]
+[ext_resource type="Texture2D" uid="uid://bc260ac6fs6qf" path="res://Icons/Star.png" id="2_02c63"]
+[ext_resource type="Texture2D" uid="uid://c0r2mysfb171n" path="res://Main/TowerTextures/Settings.png" id="3_0egqp"]
+[ext_resource type="Texture2D" uid="uid://bqq5ybbt2bv3" path="res://Icons/Hp.png" id="3_2go02"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="3_64abo"]
+[ext_resource type="Shader" uid="uid://babnrasqtqusc" path="res://UI/Main/grayscale.gdshader" id="3_e3qgs"]
+[ext_resource type="PackedScene" uid="uid://4gg0g43ta5cx" path="res://UI/Settings/settings.tscn" id="6_0egqp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64abo"]
+texture = ExtResource("3_0egqp")
+
+[sub_resource type="Gradient" id="Gradient_02c63"]
+offsets = PackedFloat32Array(0, 0.90361446, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.06626506, 0.06626506, 0.06626506, 0.93373495, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2go02"]
+gradient = SubResource("Gradient_02c63")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.24782608)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0egqp"]
+shader = ExtResource("3_e3qgs")
+shader_parameter/grayscale_strength = 0.0
+
+[sub_resource type="Shader" id="Shader_2go02"]
+code = "shader_type canvas_item; // use \"spatial\" for 3D
+
+// 0.0 = full color, 1.0 = full grayscale
+uniform float grayscale_strength : hint_range(0.0, 1.0) = 1.0;
+
+void fragment() {
+    vec4 color = texture(TEXTURE, UV);                    // get pixel color
+    float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114)); // convert to luminance
+    vec3 final_color = mix(color.rgb, vec3(gray), grayscale_strength); // blend
+    COLOR = vec4(final_color, color.a);                   // output final color
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3qgs"]
+shader = SubResource("Shader_2go02")
+shader_parameter/grayscale_strength = 0.0
+
+[sub_resource type="Shader" id="Shader_0egqp"]
+code = "shader_type canvas_item; // use \"spatial\" for 3D
+
+// 0.0 = full color, 1.0 = full grayscale
+uniform float grayscale_strength : hint_range(0.0, 1.0) = 1.0;
+
+void fragment() {
+    vec4 color = texture(TEXTURE, UV);                    // get pixel color
+    float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114)); // convert to luminance
+    vec3 final_color = mix(color.rgb, vec3(gray), grayscale_strength); // blend
+    COLOR = vec4(final_color, color.a);                   // output final color
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64abo"]
+shader = SubResource("Shader_0egqp")
+shader_parameter/grayscale_strength = 0.0
+
+[node name="UI" type="CanvasLayer" unique_id=1654169990]
+script = ExtResource("1_7r5ee")
+
+[node name="Control" type="Control" parent="." unique_id=722557679]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margins" type="MarginContainer" parent="Control" unique_id=1253670016]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 155.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_top = 55
+theme_override_constants/margin_right = 55
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Margins" unique_id=948070336]
+layout_mode = 2
+
+[node name="Star" type="TextureRect" parent="Control/Margins/HBoxContainer" unique_id=301904260]
+layout_mode = 2
+texture = ExtResource("2_02c63")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Score" type="Label" parent="Control/Margins/HBoxContainer" unique_id=1123670258]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/outline_size = 22
+theme_override_fonts/font = ExtResource("3_64abo")
+theme_override_font_sizes/font_size = 60
+text = "Score | 0"
+vertical_alignment = 1
+
+[node name="Settings" type="Button" parent="Control/Margins/HBoxContainer" unique_id=2002867772]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_64abo")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_64abo")
+theme_override_styles/hover = SubResource("StyleBoxTexture_64abo")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1362438319]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_2go02")
+
+[node name="Health" type="MarginContainer" parent="TextureRect" unique_id=1532644788]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_right = 55
+theme_override_constants/margin_bottom = 55
+
+[node name="HpContainer" type="HBoxContainer" parent="TextureRect/Health" unique_id=1770459152]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 27
+alignment = 1
+
+[node name="Hp1" type="TextureRect" parent="TextureRect/Health/HpContainer" unique_id=2038653092]
+material = SubResource("ShaderMaterial_0egqp")
+layout_mode = 2
+texture = ExtResource("3_2go02")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Hp2" type="TextureRect" parent="TextureRect/Health/HpContainer" unique_id=135700748]
+material = SubResource("ShaderMaterial_e3qgs")
+layout_mode = 2
+texture = ExtResource("3_2go02")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Hp3" type="TextureRect" parent="TextureRect/Health/HpContainer" unique_id=1305765131]
+material = SubResource("ShaderMaterial_64abo")
+layout_mode = 2
+texture = ExtResource("3_2go02")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Settings" parent="." unique_id=1844685951 instance=ExtResource("6_0egqp")]
+visible = false
+
+[connection signal="pressed" from="Control/Margins/HBoxContainer/Settings" to="." method="_on_settings_pressed"]

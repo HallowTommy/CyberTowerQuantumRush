@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Rod" format=3 uid="uid://erqwmcdu3w8n"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_37y8o"]
+
+[resource]
+script = ExtResource("1_37y8o")
+item_name = "Diamond Rod"
+cost = 5000
+luck = 0.714
+info = "[color=#1E90FF]Blue[/color]            40%
+[color=#FFA500]Orange[/color]       40%
+[color=#FF0000]Red[/color]              20%
+"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

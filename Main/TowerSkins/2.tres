@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TowerSkin" format=3 uid="uid://bhcyqnudxl5ud"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_n5pq2"]
+[ext_resource type="Texture2D" uid="uid://8x8xsax2cy7v" path="res://Main/TowerTextures/Skins/2.png" id="2_sdrg6"]
+
+[resource]
+script = ExtResource("1_n5pq2")
+item_name = "Neon Nexus"
+cost = 100
+texture = ExtResource("2_sdrg6")
+score = 3
+chance = 10.0
+info = "+3 Score
+Spawn Chance
+10%"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

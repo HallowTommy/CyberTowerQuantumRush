@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dtjryy38nfivf"]
+
+[ext_resource type="AudioStream" uid="uid://bu3ktfp0d7c6c" path="res://Sound/MainTheme.mp3" id="1_bcpli"]
+
+[node name="MainTheme" type="AudioStreamPlayer2D" unique_id=1106941546]
+stream = ExtResource("1_bcpli")
+autoplay = true
+bus = &"BGM"

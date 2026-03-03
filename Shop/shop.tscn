@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://dgc0aodyofct1"]
+
+[ext_resource type="Script" uid="uid://dfmkfrokewk2l" path="res://Shop/shop.gd" id="1_kyj5a"]
+[ext_resource type="Shader" uid="uid://2x3ov3cq1n6r" path="res://UI/Settings/panning.gdshader" id="2_so0yi"]
+[ext_resource type="Texture2D" uid="uid://bk0hm6sblk5j5" path="res://Main/TowerTextures/BG.png" id="3_hfkrb"]
+[ext_resource type="Script" uid="uid://cv0fvqe65ked1" path="res://Shop/shop_items.gd" id="4_eo7k6"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="5_7gdb2"]
+[ext_resource type="Texture2D" uid="uid://cpoea5j3jvxtv" path="res://Main/TowerTextures/ComingSoon.png" id="5_buhfn"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="6_buhfn"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="7_25km1"]
+[ext_resource type="PackedScene" uid="uid://fwkonvffjddf" path="res://UI/money_label.tscn" id="8_hfkrb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icvdq"]
+shader = ExtResource("2_so0yi")
+shader_parameter/direction = Vector2(0.5, 0.5)
+shader_parameter/speed = 0.5
+
+[sub_resource type="Gradient" id="Gradient_a04i2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_25km1"]
+gradient = SubResource("Gradient_a04i2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3not"]
+texture = ExtResource("6_buhfn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8pe2y"]
+texture = ExtResource("7_25km1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8sid2"]
+texture = ExtResource("6_buhfn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jhfdn"]
+texture = ExtResource("7_25km1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eu4ty"]
+texture = ExtResource("6_buhfn")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfljs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4qhf5"]
+
+[node name="Shop" type="Control" unique_id=1090976756]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kyj5a")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=764519423]
+material = SubResource("ShaderMaterial_icvdq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hfkrb")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1431700490]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="MarginContainer" parent="VBoxContainer" unique_id=266263226]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="ShopContainer" type="ScrollContainer" parent="VBoxContainer/Container" unique_id=1377501499]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="ShopItems" type="HBoxContainer" parent="VBoxContainer/Container/ShopContainer" unique_id=427580525]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 1484)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_eo7k6")
+
+[node name="ComingSoon" type="MarginContainer" parent="VBoxContainer/Container/ShopContainer/ShopItems" unique_id=589678282]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(720, 1484)
+layout_mode = 2
+theme_override_constants/margin_right = 180
+metadata/_edit_vertical_guides_ = [583.0]
+
+[node name="ShopItem" type="VBoxContainer" parent="VBoxContainer/Container/ShopContainer/ShopItems/ComingSoon" unique_id=1517649218]
+custom_minimum_size = Vector2(720, 1484)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Panel" type="TextureRect" parent="VBoxContainer/Container/ShopContainer/ShopItems/ComingSoon/ShopItem" unique_id=692246864]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_25km1")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Container/ShopContainer/ShopItems/ComingSoon/ShopItem/Panel" unique_id=861354888]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="TextureRect" parent="VBoxContainer/Container/ShopContainer/ShopItems/ComingSoon/ShopItem/Panel" unique_id=1458473775]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_buhfn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="VBoxContainer/Container/ShopContainer/ShopItems/ComingSoon/ShopItem/Panel" unique_id=1898588900]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.13333334, 0.36078432, 0.6156863, 1)
+theme_override_fonts/font = ExtResource("5_7gdb2")
+theme_override_font_sizes/font_size = 89
+text = "Coming
+Soon!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container2" type="MarginContainer" parent="VBoxContainer" unique_id=1181086535]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 180
+theme_override_constants/margin_bottom = 54
+
+[node name="Back" type="Button" parent="VBoxContainer/Container2" unique_id=1590457213]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.13333334, 0.36078432, 0.6156863, 1)
+theme_override_fonts/font = ExtResource("5_7gdb2")
+theme_override_font_sizes/font_size = 82
+theme_override_styles/normal = SubResource("StyleBoxTexture_a3not")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8pe2y")
+theme_override_styles/hover = SubResource("StyleBoxTexture_a3not")
+text = "Back"
+
+[node name="LeftArrow" type="Button" parent="." unique_id=149465344]
+z_index = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = 142.0
+offset_right = 160.0
+offset_bottom = 242.0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_8sid2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jhfdn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_eu4ty")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vfljs")
+
+[node name="RightArrow" type="Button" parent="." unique_id=1003520979]
+z_index = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 142.0
+offset_right = -60.0
+offset_bottom = 242.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(1, 0.5)
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_8sid2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jhfdn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_eu4ty")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4qhf5")
+
+[node name="MoneyLabel" parent="." unique_id=1469629930 instance=ExtResource("8_hfkrb")]
+layout_mode = 1
+
+[connection signal="pressed" from="VBoxContainer/Container2/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="LeftArrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="RightArrow" to="." method="_on_right_arrow_pressed"]

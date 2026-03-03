@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Rod" format=3 uid="uid://sxqr4ssp4ga3"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_cppmy"]
+
+[resource]
+script = ExtResource("1_cppmy")
+item_name = "Bronze Rod"
+cost = 750
+luck = 0.286
+info = "[color=#1E90FF]Blue[/color]            70%
+[color=#FFA500]Orange[/color]       22%
+[color=#FF0000]Red[/color]              8%
+"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

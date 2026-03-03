@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Rod" format=3 uid="uid://bdbv2dr6shf5y"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_u1nvv"]
+
+[resource]
+script = ExtResource("1_u1nvv")
+item_name = "Wooden Rod"
+info = "[color=#1E90FF]Blue[/color]            90%
+[color=#FFA500]Orange[/color]       10%
+[color=#FF0000]Red[/color]              0%"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

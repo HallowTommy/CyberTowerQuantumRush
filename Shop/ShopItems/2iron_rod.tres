@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Rod" format=3 uid="uid://defo7ye8rtmtq"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_sktib"]
+
+[resource]
+script = ExtResource("1_sktib")
+item_name = "Iron Rod"
+cost = 250
+luck = 0.143
+info = "[color=#1E90FF]Blue[/color]            80%
+[color=#FFA500]Orange[/color]       15%
+[color=#FF0000]Red[/color]              5%
+"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

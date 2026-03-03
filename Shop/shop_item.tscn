@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://ba4s0lpws24lr"]
+
+[ext_resource type="Script" uid="uid://cwmp5m2852wyc" path="res://Shop/shop_item.gd" id="1_1ybge"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="2_bl64h"]
+[ext_resource type="Texture2D" uid="uid://dn5upca1vdh2i" path="res://Main/TowerTextures/square.png" id="3_sxq1n"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="3_tludc"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="4_sxq1n"]
+
+[sub_resource type="Gradient" id="Gradient_a04i2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2c8sf"]
+gradient = SubResource("Gradient_a04i2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fcg2h"]
+texture = ExtResource("3_tludc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n7k5l"]
+texture = ExtResource("4_sxq1n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a04i2"]
+texture = ExtResource("3_tludc")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2c8sf"]
+
+[node name="ShopItem" type="MarginContainer" unique_id=427186763]
+custom_minimum_size = Vector2(720, 1484)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -742.0
+offset_right = 360.0
+offset_bottom = 742.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ybge")
+metadata/_edit_vertical_guides_ = [583.0]
+
+[node name="ShopItem" type="VBoxContainer" parent="." unique_id=2096010566]
+custom_minimum_size = Vector2(720, 1484)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Name" type="Label" parent="ShopItem" unique_id=549870070]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.13333334, 0.36078432, 0.6156863, 1)
+theme_override_fonts/font = ExtResource("2_bl64h")
+theme_override_font_sizes/font_size = 89
+text = "Skin"
+horizontal_alignment = 1
+
+[node name="Panel" type="TextureRect" parent="ShopItem" unique_id=1614763687]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_2c8sf")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShopItem/Panel" unique_id=2092385958]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="TextureRect" parent="ShopItem/Panel" unique_id=761305592]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_sxq1n")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Buy" type="Button" parent="ShopItem" unique_id=1193601441]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_fcg2h")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_n7k5l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fcg2h")
+
+[node name="Cost" type="Label" parent="ShopItem/Buy" unique_id=732161988]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_bl64h")
+theme_override_font_sizes/font_size = 82
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="RichTextLabel" parent="ShopItem" unique_id=1611828730]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_bl64h")
+theme_override_font_sizes/normal_font_size = 63
+theme_override_styles/normal = SubResource("StyleBoxTexture_a04i2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2c8sf")
+bbcode_enabled = true
+text = "Skin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="ShopItem/Buy" to="." method="_on_buy_pressed"]

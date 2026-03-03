@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TowerSkin" format=3 uid="uid://06xastoeponm"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_sla14"]
+[ext_resource type="Texture2D" uid="uid://coy5o80gnwn8c" path="res://Main/TowerTextures/Skins/1.png" id="2_gt5yp"]
+
+[resource]
+script = ExtResource("1_sla14")
+item_name = "Ion Gate"
+cost = 25
+texture = ExtResource("2_gt5yp")
+score = 2
+chance = 40.0
+info = "+2 Score
+Spawn Chance
+40%"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"
