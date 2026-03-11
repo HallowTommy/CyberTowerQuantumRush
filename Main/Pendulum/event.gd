@@ -3,7 +3,7 @@ extends Node
 @onready var time: Label = $CanvasLayer/Health/Time
 @onready var event_timer: Timer = $EventTimer
 @onready var label: Label = $CanvasLayer/Label
-var events : Array[Callable] = [_sped_up,_earthquake,_triple_score,_zoom_out,_flipped_rotation]
+var events : Array[Callable] = [_sped_up,_earthquake,_triple_score,_zoom_out,_flipped_rotation,_slomo]
 var event_count : int = 3
 
 func _process(_delta: float) -> void:
@@ -31,8 +31,11 @@ func _flipped_rotation() -> void:
 	_update_event("Flipped Rotation", 3)
 	get_parent().rotation_direction = -1
 func _sped_up() -> void:
-	_update_event("Sped up", 3)
+	_update_event("Sped up!", 3)
 	Engine.time_scale = 1.1
+func _slomo() -> void:
+	_update_event("Slomo!", 3)
+	Engine.time_scale = .85
 func _zoom_out() -> void:
 	_update_event("Zoom Out", 3)
 	var camera = get_parent().get_node("Camera")

@@ -191,7 +191,7 @@ process_material = SubResource("ParticleProcessMaterial_n67f6")
 script = ExtResource("9_eqmf1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="EventComponent" unique_id=494641973]
-layer = 3
+layer = 5
 
 [node name="Health" type="MarginContainer" parent="EventComponent/CanvasLayer" unique_id=2120616713]
 anchors_preset = 12
@@ -206,11 +206,12 @@ theme_override_constants/margin_right = 55
 theme_override_constants/margin_bottom = 22
 
 [node name="Time" type="Label" parent="EventComponent/CanvasLayer/Health" unique_id=324567156]
+z_index = 9
 layout_mode = 2
 theme_override_constants/outline_size = 14
 theme_override_fonts/font = ExtResource("10_n67f6")
 theme_override_font_sizes/font_size = 152
-text = "30"
+text = "10"
 
 [node name="Label" type="Label" parent="EventComponent/CanvasLayer" unique_id=2106355655]
 anchors_preset = 8
@@ -233,7 +234,6 @@ text = "POV Shift"
 [node name="EventTimer" type="Timer" parent="EventComponent" unique_id=618656008]
 wait_time = 10.0
 one_shot = true
-autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EventComponent" unique_id=1782657906]
 libraries/ = SubResource("AnimationLibrary_eqmf1")

@@ -71,7 +71,7 @@ func _update_items() -> void:
 	offset = 904.0
 
 func _on_back_pressed() -> void:
-	SceneTransition._change_scene("res://UI/MainMenu/main_menu.tscn")
+	SceneTransition._change_scene("res://UI/Menu/main_menu.tscn")
 
 func _on_enter_pressed() -> void:
 	var scene_path : String = locations_arr[scene_index][1]

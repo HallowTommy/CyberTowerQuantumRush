@@ -12,6 +12,15 @@
 [ext_resource type="Shader" uid="uid://dcasitk6wegpv" path="res://Main/Game/clouds.gdshader" id="6_ir7v8"]
 [ext_resource type="Texture2D" uid="uid://4b7g57fgefcc" path="res://Main/TowerTextures/StartTower.png" id="7_nfw1g"]
 [ext_resource type="PackedScene" uid="uid://cxd8uqxq4mxsq" path="res://UI/Menu/game_over.tscn" id="10_ci1dh"]
+[ext_resource type="Script" uid="uid://d3qux86iq8ecu" path="res://Main/Game/tutorial.gd" id="12_noa4y"]
+[ext_resource type="Shader" uid="uid://2x3ov3cq1n6r" path="res://UI/Settings/panning.gdshader" id="13_v706k"]
+[ext_resource type="Texture2D" uid="uid://bk0hm6sblk5j5" path="res://Main/TowerTextures/BG.png" id="14_8n4h6"]
+[ext_resource type="Texture2D" uid="uid://dt1t522js8112" path="res://UI/Sprites/progressBar.png" id="15_swqa0"]
+[ext_resource type="Texture2D" uid="uid://c1jbm7yjo3kjr" path="res://UI/Sprites/bar.png" id="16_6l62c"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="17_wxf6i"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="18_3pvsr"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="19_q4fma"]
+[ext_resource type="PackedScene" uid="uid://4gg0g43ta5cx" path="res://UI/Settings/settings.tscn" id="20_v706k"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hhup6"]
 random_pitch = 1.9999999
@@ -137,6 +146,23 @@ colors = PackedColorArray(0.8984375, 0, 1, 1, 0.75045776, 0.13671875, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfw1g"]
 gradient = SubResource("Gradient_ci1dh")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pae8f"]
+shader = ExtResource("13_v706k")
+shader_parameter/direction = Vector2(0.5, 0.5)
+shader_parameter/speed = 0.5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ylw8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lq3ax"]
+corner_radius_top_right = 85
+corner_radius_bottom_right = 111
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3not"]
+texture = ExtResource("18_3pvsr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8pe2y"]
+texture = ExtResource("19_q4fma")
+
 [node name="Main" type="Node2D" unique_id=403266150]
 process_mode = 3
 script = ExtResource("1_0xm2m")
@@ -154,6 +180,7 @@ volume_db = -4.0
 bus = &"SFX"
 
 [node name="UI" parent="." unique_id=1654169990 instance=ExtResource("4_8cpud")]
+layer = 4
 
 [node name="Start" type="CharacterBody2D" parent="." unique_id=822448388 groups=["Stackable"]]
 z_index = 1
@@ -248,9 +275,241 @@ pivot_offset_ratio = Vector2(0, 1)
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_nfw1g")
 
+[node name="Tutorial" type="CanvasLayer" parent="." unique_id=1636171250]
+layer = 6
+script = ExtResource("12_noa4y")
+
+[node name="ColorRect" type="TextureRect" parent="Tutorial" unique_id=1536220149]
+material = SubResource("ShaderMaterial_pae8f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8n4h6")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Control" type="Control" parent="Tutorial/ColorRect" unique_id=1746589978]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 248.0
+offset_top = 93.0
+offset_right = 206.0
+offset_bottom = -1403.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.585, 0.585)
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/ColorRect/Control" unique_id=712625062]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 58.0
+offset_top = 215.0
+offset_right = -58.0
+offset_bottom = 323.0
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("15_swqa0")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Tutorial/ColorRect/Control" unique_id=1631636800]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 105.0
+offset_top = 234.0
+offset_right = -107.0
+offset_bottom = 306.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_2ylw8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lq3ax")
+show_percentage = false
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/ColorRect/Control/ProgressBar" unique_id=1575242981]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_right = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("16_6l62c")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/ColorRect/Control" unique_id=1736457371]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 58.0
+offset_top = 632.47864
+offset_right = -58.0
+offset_bottom = 740.47864
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("15_swqa0")
+expand_mode = 1
+
+[node name="ProgressBar2" type="ProgressBar" parent="Tutorial/ColorRect/Control" unique_id=374073508]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 105.0
+offset_top = 651.47864
+offset_right = -107.0
+offset_bottom = 723.47864
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_2ylw8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lq3ax")
+value = 0.13
+show_percentage = false
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/ColorRect/Control/ProgressBar2" unique_id=428215521]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_right = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("16_6l62c")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Tutorial/ColorRect/Control" unique_id=1107267047]
+layout_mode = 0
+offset_left = -294.0171
+offset_top = 358.9744
+offset_right = 1372.9829
+offset_bottom = 575.97437
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 88
+text = "While green bar is active 
+swipe left and right to rotate block"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Tutorial/ColorRect/Control" unique_id=272446811]
+layout_mode = 0
+offset_left = -294.0171
+offset_top = 760.68384
+offset_right = 1372.9829
+offset_bottom = 977.6839
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 88
+text = "After green bar you can no longer
+rotate the block"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Tutorial/ColorRect/Control" unique_id=319258470]
+layout_mode = 0
+offset_left = -294.0171
+offset_top = 1753.8462
+offset_right = 1372.9829
+offset_bottom = 1970.8462
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 88
+text = "Tap the screen so the tower falls"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="Tutorial/ColorRect/Control" unique_id=1750017973]
+layout_mode = 0
+offset_left = -294.0171
+offset_top = 1962.3932
+offset_right = 1372.9829
+offset_bottom = 2179.393
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 88
+text = "Create the BIGGEST tower!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Tutorial/ColorRect/Control" unique_id=1213703060]
+layout_mode = 0
+offset_left = -143.58972
+offset_top = 170.94016
+offset_right = 9.931519
+offset_bottom = 340.94016
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 141
+text = "1"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Tutorial/ColorRect/Control" unique_id=87860401]
+layout_mode = 0
+offset_left = -143.58972
+offset_top = 1270.0854
+offset_right = 9.931519
+offset_bottom = 1440.0854
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 141
+text = "2"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Tutorial/ColorRect/Control" unique_id=1172789944]
+layout_mode = 0
+offset_left = -143.58972
+offset_top = 2201.7095
+offset_right = 9.931519
+offset_bottom = 2371.7095
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 96
+text = "NOTE| Every 10 seconds
+random event spawns"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Tutorial/ColorRect/Control" unique_id=793867402]
+layout_mode = 0
+offset_left = 299.14532
+offset_top = 1092.3076
+offset_right = 851.5317
+offset_bottom = 1574.0552
+rotation = 0.27925268
+texture = ExtResource("6_ci1dh")
+expand_mode = 1
+
+[node name="Close" type="Button" parent="Tutorial" unique_id=2065745847]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -280.0
+offset_right = 360.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.13333334, 0.36078432, 0.6156863, 1)
+theme_override_fonts/font = ExtResource("17_wxf6i")
+theme_override_font_sizes/font_size = 82
+theme_override_styles/normal = SubResource("StyleBoxTexture_a3not")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8pe2y")
+theme_override_styles/hover = SubResource("StyleBoxTexture_a3not")
+text = "Close"
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=8673024]
-layer = 5
+layer = 14
+
+[node name="Settings" parent="CanvasLayer2" unique_id=978255378 instance=ExtResource("20_v706k")]
+visible = false
 
 [node name="GameOver" parent="CanvasLayer2" unique_id=721595151 instance=ExtResource("10_ci1dh")]
 unique_name_in_owner = true
 visible = false
+
+[connection signal="pressed" from="Tutorial/Close" to="Tutorial" method="_on_close_pressed"]

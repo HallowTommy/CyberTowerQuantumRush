@@ -18,4 +18,8 @@ func _update_score(score_amount) -> void:
 
 
 func _on_settings_pressed() -> void:
-	SceneTransition._transition($Settings.show)
+	SceneTransition._transition($"../CanvasLayer2/Settings".show)
+
+
+func _on_home_pressed() -> void:
+	SceneTransition._change_scene("res://UI/Menu/main_menu.tscn")

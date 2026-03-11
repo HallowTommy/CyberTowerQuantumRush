@@ -29,6 +29,10 @@ var timer_wait_time := 3.0
 func _ready() -> void:
 	#tower_scenes = get_scenes("res://Main/Towers/")
 	_spawn_tower()
+	
+func _start() -> void:
+	$Timer._start(timer_wait_time)
+	$EventComponent/EventTimer.start()
 
 func _process(delta: float) -> void:
 	$Aura.global_position = rope.to_global(rope.get_point_position(1))
@@ -55,17 +59,27 @@ func _spawn_tower() -> void:
 	else:
 		tower = _spawn_square_tower()
 		
+	
+
 	$Towers.add_child(tower)
 	current_tower = tower
 	var rad = randf_range(-PI, PI)
 	current_tower.rotation = rad
 	current_tower.tar_rotation = rad
 	current_tower.collided.connect(_update)
-	$Timer._start(timer_wait_time)
 	is_rotating = true
 	tower.index = i
 	i+=1
 	_update_tower()
+	$Timer._start(timer_wait_time)
+	#_start_bar()
+#func _start_bar() -> void:
+	#var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	#tween.tween_property($Timer/CanvasLayer/Control, "modulate:a", 1.0, .5)
+	#$Timer.start(timer_wait_time)
+	#$Timer.set_process(true)
+	#%ProgressBar.max_value = timer_wait_time
+	
 func disable_rotation(tower) -> void:
 	if tower:
 		tower.rotating = false

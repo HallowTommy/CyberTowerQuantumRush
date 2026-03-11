@@ -6,10 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://bqq5ybbt2bv3" path="res://Icons/Hp.png" id="3_2go02"]
 [ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="3_64abo"]
 [ext_resource type="Shader" uid="uid://babnrasqtqusc" path="res://UI/Main/grayscale.gdshader" id="3_e3qgs"]
-[ext_resource type="PackedScene" uid="uid://4gg0g43ta5cx" path="res://UI/Settings/settings.tscn" id="6_0egqp"]
+[ext_resource type="Texture2D" uid="uid://cq73gpn6w0cvr" path="res://UI/Settings/Home_Icon.png" id="5_t2m46"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64abo"]
 texture = ExtResource("3_0egqp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qr78"]
+texture = ExtResource("5_t2m46")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y5bci"]
+texture = ExtResource("5_t2m46")
+modulate_color = Color(0.6374546, 0.6312561, 0.8203125, 1)
 
 [sub_resource type="Gradient" id="Gradient_02c63"]
 offsets = PackedFloat32Array(0, 0.90361446, 1)
@@ -59,6 +66,7 @@ shader = SubResource("Shader_0egqp")
 shader_parameter/grayscale_strength = 0.0
 
 [node name="UI" type="CanvasLayer" unique_id=1654169990]
+layer = 5
 script = ExtResource("1_7r5ee")
 
 [node name="Control" type="Control" parent="." unique_id=722557679]
@@ -100,13 +108,25 @@ theme_override_font_sizes/font_size = 60
 text = "Score | 0"
 vertical_alignment = 1
 
-[node name="Settings" type="Button" parent="Control/Margins/HBoxContainer" unique_id=2002867772]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Margins/HBoxContainer" unique_id=2018478545]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Settings" type="Button" parent="Control/Margins/HBoxContainer/HBoxContainer" unique_id=2002867772]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxTexture_64abo")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_64abo")
 theme_override_styles/hover = SubResource("StyleBoxTexture_64abo")
+
+[node name="Home" type="Button" parent="Control/Margins/HBoxContainer/HBoxContainer" unique_id=1641673241]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_5qr78")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y5bci")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5qr78")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1362438319]
 anchors_preset = 12
@@ -156,7 +176,5 @@ texture = ExtResource("3_2go02")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="Settings" parent="." unique_id=1844685951 instance=ExtResource("6_0egqp")]
-visible = false
-
-[connection signal="pressed" from="Control/Margins/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Margins/HBoxContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Margins/HBoxContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
