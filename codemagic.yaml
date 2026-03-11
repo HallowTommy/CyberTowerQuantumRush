@@ -1,28 +1,19 @@
 workflows:
-  ios-godot-appstore:
-    name: iOS Godot 4.6.1 > App Store
+  ios-godot-app-preview:
+    name: iOS Godot 4.6.1 > App Preview (Simulator)
     instance_type: mac_mini_m2
     max_build_duration: 60
 
     environment:
-      groups:
-        - CTQR
-
       vars:
         GODOT_VERSION: "4.6.1-stable"
         GODOT_TEMPL_VERSION_DIR: "4.6.1.stable"
-        EXPORT_PRESET: "IOS"
-
-        APPSTORE_KEY_ID: "QM8F42WFT5"
-        APPSTORE_ISSUER_ID: "730d5cf3-32ea-4113-b7a9-0e210845e0a9"
-
-      ios_signing:
-        provisioning_profiles:
-          - CTQR
+        EXPORT_PRESET: "iOS"
 
     scripts:
       - name: Install dependencies
         script: |
+          set -e
           brew install curl unzip || true
 
       - name: Download Godot
@@ -51,19 +42,20 @@ workflows:
           unzip -o templates.tpz
           mv templates/* "$TEMPL_DIR/"
 
-      - name: Export iOS project
+      - name: Export iOS project (Xcode)
         script: |
           set -e
           mkdir -p build/ios
 
           GODOT_BIN=$(find tools -type f -path "*Godot*.app/Contents/MacOS/*" | head -n 1)
+          echo "Godot bin: $GODOT_BIN"
 
           "$GODOT_BIN" --headless \
             --path . \
             --export-release "${EXPORT_PRESET}" \
             build/ios
 
-      - name: Build IPA
+      - name: Build for iOS Simulator (force x86_64)
         script: |
           set -e
 
@@ -76,47 +68,22 @@ workflows:
 
           echo "Using scheme: $SCHEME"
 
-          xcode-project use-profiles --project "$XCODEPROJ"
-
           xcodebuild \
             -project "$XCODEPROJ" \
             -scheme "$SCHEME" \
-            -configuration Release \
-            -sdk iphoneos \
-            -archivePath "$CM_BUILD_DIR/App.xcarchive" \
-            archive
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            ARCHS=x86_64 \
+            EXCLUDED_ARCHS=arm64 \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            build
 
-          cat > exportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-          "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>method</key>
-              <string>app-store-connect</string>
-              <key>signingStyle</key>
-              <string>manual</string>
-              <key>provisioningProfiles</key>
-              <dict>
-                  <key>com.cyber.tower</key>
-                  <string>CTQR</string>
-              </dict>
-          </dict>
-          </plist>
-          EOF
-
-          xcodebuild -exportArchive \
-            -archivePath "$CM_BUILD_DIR/App.xcarchive" \
-            -exportPath ipa \
-            -exportOptionsPlist exportOptions.plist
-
+      - name: Collect .app
+        script: |
+          mkdir -p simulator_artifacts
+          find ~/Library/Developer/Xcode/DerivedData -name "*.app" -type d -exec cp -R {} simulator_artifacts/ \;
 
     artifacts:
-      - ipa/*.ipa
-
-    publishing:
-      app_store_connect:
-        api_key: $ASC_PRIVATE_KEY
-        key_id: $APPSTORE_KEY_ID
-        issuer_id: $APPSTORE_ISSUER_ID
-        submit_to_testflight: false
+      - simulator_artifacts/*.app
