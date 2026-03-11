@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://qargmxoa40qi"
 SceneTransition="*uid://ms4pxji4oygs"
 Global="*uid://esbus0ll2nct"
 MainTheme="*uid://dtjryy38nfivf"
+Webview="*uid://bapl8olh78fm2"
 
 [display]
 
