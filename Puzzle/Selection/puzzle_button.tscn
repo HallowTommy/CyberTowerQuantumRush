@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bb0n3ciwynvbc"]
+
+[ext_resource type="Theme" uid="uid://cro62j845wrhq" path="res://ui.tres" id="1_2pyyj"]
+[ext_resource type="Script" uid="uid://8fnov6tv81nq" path="res://Puzzle/Selection/puzzle_button.gd" id="1_5pujj"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="1_xcn76"]
+
+[node name="PuzzleButton" type="Button" unique_id=525390806]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
+theme = ExtResource("1_2pyyj")
+theme_override_fonts/font = ExtResource("1_xcn76")
+theme_override_font_sizes/font_size = 103
+text = "1"
+script = ExtResource("1_5pujj")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

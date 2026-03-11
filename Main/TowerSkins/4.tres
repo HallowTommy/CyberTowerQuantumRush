@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TowerSkin" format=3 uid="uid://bg1ar4xnxqrnl"]
+
+[ext_resource type="Script" uid="uid://bq0snpnov4ghe" path="res://Shop/item_resource.gd" id="1_7hrsf"]
+[ext_resource type="Texture2D" uid="uid://c44hkmymrxakl" path="res://Main/TowerTextures/Skins/4.png" id="2_7hrsf"]
+
+[resource]
+script = ExtResource("1_7hrsf")
+item_name = "Neon Pinnacle"
+cost = 200
+texture = ExtResource("2_7hrsf")
+score = 7
+chance = 10.0
+info = "+7 Score
+Spawn Chance
+10%"
+metadata/_custom_type_script = "uid://bq0snpnov4ghe"

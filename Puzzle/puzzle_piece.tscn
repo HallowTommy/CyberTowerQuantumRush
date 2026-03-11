@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bfi7k25suy6bn"]
+
+[ext_resource type="Shader" uid="uid://727o1bq5g5yv" path="res://Puzzle/puzzle.gdshader" id="1_6520p"]
+[ext_resource type="Script" uid="uid://8gcwb7o0j4bl" path="res://Puzzle/puzzle_piece.gd" id="1_o4kg4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mlmcq"]
+resource_local_to_scene = true
+shader = ExtResource("1_6520p")
+shader_parameter/id = 4
+shader_parameter/outline_color = Color(0.5372549, 0.50980395, 0.67058825, 1)
+shader_parameter/outline_thickness = 0.030000001425
+
+[sub_resource type="Gradient" id="Gradient_3orft"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f0dib"]
+gradient = SubResource("Gradient_3orft")
+
+[node name="PuzzlePiece" type="TextureRect" unique_id=780160397]
+material = SubResource("ShaderMaterial_mlmcq")
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_f0dib")
+expand_mode = 1
+script = ExtResource("1_o4kg4")
+
+[node name="Panel" type="Panel" parent="." unique_id=1165507997]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="." unique_id=2099689574]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_pressed"]

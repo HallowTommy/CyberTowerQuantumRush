@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c0telxdvglcxj"]
+
+[ext_resource type="Script" uid="uid://ciovjpx1j7kxu" path="res://Main/Pendulum/tower.gd" id="1_2gob7"]
+[ext_resource type="Texture2D" uid="uid://dvy1s7vh8vn27" path="res://Main/TowerTextures/Skins/5.png" id="2_dwklv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u642j"]
+size = Vector2(250, 250)
+
+[node name="SquareTower" type="CharacterBody2D" unique_id=1458372492 groups=["Stackable"]]
+script = ExtResource("1_2gob7")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2137175175]
+position = Vector2(0, 125)
+shape = SubResource("RectangleShape2D_u642j")
+
+[node name="Sprite" type="TextureRect" parent="Collision" unique_id=555269661]
+offset_left = -146.0
+offset_top = -136.0
+offset_right = 147.0
+offset_bottom = 126.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_dwklv")
+expand_mode = 1

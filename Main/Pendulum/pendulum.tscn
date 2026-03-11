@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://i7j380amevdh"]
+
+[ext_resource type="Script" uid="uid://b04mowqjluqn7" path="res://Main/Pendulum/pendulum.gd" id="1_ts572"]
+[ext_resource type="Script" uid="uid://drnbwgdq6sa1d" path="res://Main/Pendulum/camera.gd" id="3_revod"]
+[ext_resource type="Script" uid="uid://dswbtbevoby4k" path="res://Main/Pendulum/rope.gd" id="3_uxaci"]
+[ext_resource type="Texture2D" uid="uid://d6apgom7wahe" path="res://Main/TowerTextures/Magnet.png" id="5_7m1hf"]
+[ext_resource type="Script" uid="uid://n14w246mt25k" path="res://Main/Pendulum/timer.gd" id="5_sbgda"]
+[ext_resource type="Texture2D" uid="uid://dt1t522js8112" path="res://UI/Sprites/progressBar.png" id="6_yxodi"]
+[ext_resource type="Texture2D" uid="uid://c1jbm7yjo3kjr" path="res://UI/Sprites/bar.png" id="7_yxodi"]
+[ext_resource type="Texture2D" uid="uid://bjnllmb6tugmr" path="res://UI/Sprites/circle_04.png" id="8_vuv67"]
+[ext_resource type="Script" uid="uid://mmhvd38v0wa2" path="res://Main/Pendulum/event.gd" id="9_eqmf1"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="10_n67f6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0p0il"]
+size = Vector2(1288, 302)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuv67"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxodi"]
+corner_radius_top_right = 85
+corner_radius_bottom_right = 111
+
+[sub_resource type="Gradient" id="Gradient_7hf0d"]
+offsets = PackedFloat32Array(0, 0.33571428, 0.6857143, 1)
+colors = PackedColorArray(0.007843138, 0.07450981, 0.05490196, 1, 0.38439277, 3.074521, 0.19160084, 1, 0.24877034, 1.678948, 0.27274612, 1, 0.15686275, 0.023529412, 0.39215687, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_opgts"]
+gradient = SubResource("Gradient_7hf0d")
+
+[sub_resource type="Curve" id="Curve_arrwn"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2710843, 1.4157302), 0.0, 0.0, 0, 0, Vector2(0.6626506, 0.6853932), -1.4149554, -1.4149554, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_eqmf1"]
+curve = SubResource("Curve_arrwn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n67f6"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_eqmf1")
+color_ramp = SubResource("GradientTexture1D_opgts")
+hue_variation_min = -0.4
+hue_variation_max = 0.41999996
+
+[sub_resource type="Animation" id="Animation_opgts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_arrwn"]
+resource_name = "announce"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.79999995, 1.3),
+"transitions": PackedFloat32Array(0.30778608, 0.30778608, 1.7411009, 1.7411009),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqmf1"]
+_data = {
+&"RESET": SubResource("Animation_opgts"),
+&"announce": SubResource("Animation_arrwn")
+}
+
+[node name="Pendulum" type="Node2D" unique_id=296680403]
+script = ExtResource("1_ts572")
+
+[node name="Towers" type="Node2D" parent="." unique_id=932585015]
+top_level = true
+
+[node name="CD" type="Timer" parent="." unique_id=1998934193]
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+
+[node name="Rope" type="Line2D" parent="." unique_id=1121884145]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -1100)
+points = PackedVector2Array(0, 0, 0, 600)
+default_color = Color(0, 0, 0, 1)
+texture_mode = 2
+script = ExtResource("3_uxaci")
+length = 800.0
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1563656192]
+process_mode = 3
+script = ExtResource("3_revod")
+max_offset = 75.0
+max_rotation = 3.0
+
+[node name="Deletor" type="Area2D" parent="." unique_id=303186206]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deletor" unique_id=1897752366]
+position = Vector2(0, 1459)
+shape = SubResource("RectangleShape2D_0p0il")
+
+[node name="Hook" type="Sprite2D" parent="." unique_id=48424016]
+visible = false
+z_index = 2
+position = Vector2(0, -535)
+scale = Vector2(0.447, 0.447)
+texture = ExtResource("5_7m1hf")
+offset = Vector2(0, -46.97998)
+
+[node name="Timer" type="Timer" parent="." unique_id=375872038]
+one_shot = true
+script = ExtResource("5_sbgda")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Timer" unique_id=749728558]
+
+[node name="Control" type="Control" parent="Timer/CanvasLayer" unique_id=2062093062]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Timer/CanvasLayer/Control" unique_id=355299257]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 58.0
+offset_top = 215.0
+offset_right = -58.0
+offset_bottom = 323.0
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("6_yxodi")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Timer/CanvasLayer/Control" unique_id=889938003]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 105.0
+offset_top = 234.0
+offset_right = -107.0
+offset_bottom = 306.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_vuv67")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yxodi")
+show_percentage = false
+
+[node name="TextureRect2" type="TextureRect" parent="Timer/CanvasLayer/Control/ProgressBar" unique_id=1683229663]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_right = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+mouse_filter = 0
+texture = ExtResource("7_yxodi")
+expand_mode = 1
+
+[node name="Aura" type="GPUParticles2D" parent="." unique_id=1765876085]
+amount = 3
+texture = ExtResource("8_vuv67")
+lifetime = 3.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_n67f6")
+
+[node name="EventComponent" type="Node" parent="." unique_id=1254209397]
+script = ExtResource("9_eqmf1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="EventComponent" unique_id=494641973]
+layer = 3
+
+[node name="Health" type="MarginContainer" parent="EventComponent/CanvasLayer" unique_id=2120616713]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -159.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_right = 55
+theme_override_constants/margin_bottom = 22
+
+[node name="Time" type="Label" parent="EventComponent/CanvasLayer/Health" unique_id=324567156]
+layout_mode = 2
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("10_n67f6")
+theme_override_font_sizes/font_size = 152
+text = "30"
+
+[node name="Label" type="Label" parent="EventComponent/CanvasLayer" unique_id=2106355655]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("10_n67f6")
+theme_override_font_sizes/font_size = 111
+text = "POV Shift"
+
+[node name="EventTimer" type="Timer" parent="EventComponent" unique_id=618656008]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EventComponent" unique_id=1782657906]
+libraries/ = SubResource("AnimationLibrary_eqmf1")
+
+[connection signal="timeout" from="CD" to="." method="_on_cd_timeout"]
+[connection signal="body_entered" from="Deletor" to="." method="_on_deletor_body_entered"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
+[connection signal="timeout" from="EventComponent/EventTimer" to="EventComponent" method="_on_event_timer_timeout"]

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://fwkonvffjddf"]
+
+[ext_resource type="Script" uid="uid://bccwvf56ig5s7" path="res://Shop/money_label.gd" id="1_2lfl5"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="2_01jnf"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="3_01jnf"]
+[ext_resource type="Texture2D" uid="uid://cynl40eyqk8qk" path="res://Main/TowerTextures/Coin.png" id="3_lw0w0"]
+
+[node name="MoneyLabel" type="Control" unique_id=1469629930]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2lfl5")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=531656450]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 270.0
+offset_right = -270.0
+offset_bottom = 175.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=1498809503]
+layout_mode = 2
+texture = ExtResource("2_01jnf")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1310039465]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Coins" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1321750914]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_01jnf")
+theme_override_font_sizes/font_size = 33
+text = "123123"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=902675143]
+layout_mode = 2
+texture = ExtResource("3_lw0w0")
+expand_mode = 3
+stretch_mode = 5

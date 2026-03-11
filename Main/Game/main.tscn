@@ -1,0 +1,256 @@
+[gd_scene format=3 uid="uid://cpvhnql88jnjw"]
+
+[ext_resource type="Script" uid="uid://xcyrx6lq5u2h" path="res://Main/Game/main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://i7j380amevdh" path="res://Main/Pendulum/pendulum.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cwxsskm1phvqw" path="res://Main/floor.gd" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://sx4w5rqgiwby" path="res://Sound/Fall.mp3" id="3_nfw1g"]
+[ext_resource type="PackedScene" uid="uid://dub6g7cchlyma" path="res://UI/Main/ui.tscn" id="4_8cpud"]
+[ext_resource type="AudioStream" uid="uid://b3s5bvvfuslpc" path="res://Sound/Award.mp3" id="4_hhup6"]
+[ext_resource type="Texture2D" uid="uid://dbqldn1hjltdy" path="res://Icons/star_01.png" id="5_3dqdr"]
+[ext_resource type="Texture2D" uid="uid://brilpxo2hi1d8" path="res://Main/TowerTextures/Road.png" id="5_g8jyd"]
+[ext_resource type="Texture2D" uid="uid://dn5upca1vdh2i" path="res://Main/TowerTextures/square.png" id="6_ci1dh"]
+[ext_resource type="Shader" uid="uid://dcasitk6wegpv" path="res://Main/Game/clouds.gdshader" id="6_ir7v8"]
+[ext_resource type="Texture2D" uid="uid://4b7g57fgefcc" path="res://Main/TowerTextures/StartTower.png" id="7_nfw1g"]
+[ext_resource type="PackedScene" uid="uid://cxd8uqxq4mxsq" path="res://UI/Menu/game_over.tscn" id="10_ci1dh"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hhup6"]
+random_pitch = 1.9999999
+streams_count = 1
+stream_0/stream = ExtResource("3_nfw1g")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_87xtp"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("4_hhup6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cpud"]
+size = Vector2(416, 508)
+
+[sub_resource type="Gradient" id="Gradient_ir7v8"]
+colors = PackedColorArray(0.7421875, 0.22433181, 0.0289917, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_htnj5"]
+gradient = SubResource("Gradient_ir7v8")
+
+[sub_resource type="Curve" id="Curve_8cpud"]
+_data = [Vector2(0, 0.24719107), 0.0, 0.0, 0, 0, Vector2(0.2364865, 0.34831464), -0.67748696, -0.67748696, 0, 0, Vector2(1, 0), 0.110861406, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3dqdr"]
+curve = SubResource("Curve_8cpud")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2yge"]
+particle_flag_disable_z = true
+angle_min = -14.9999895
+angle_max = 15.0000105
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_3dqdr")
+color = Color(2.2557805, 2.4405563, 0.52914584, 1)
+color_ramp = SubResource("GradientTexture1D_htnj5")
+
+[sub_resource type="Gradient" id="Gradient_3dqdr"]
+offsets = PackedFloat32Array(0.012048192, 0.19565217, 0.3152174, 0.4402174, 0.5597826, 0.66847825, 0.77717394, 0.9130435)
+colors = PackedColorArray(0, 0.16470589, 0.4627451, 1, 0.5803922, 0.827451, 0.69411767, 1, 0.4, 0.45490196, 0.59607846, 1, 0.13171387, 0.22572224, 0.32421875, 1, 0.08178711, 0.17773683, 0.26171875, 1, 0.02178955, 0.10439964, 0.1640625, 1, 0.005722046, 0.025360104, 0.05859375, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ir7v8"]
+gradient = SubResource("Gradient_3dqdr")
+height = 100
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Shader" id="Shader_ci1dh"]
+code = "shader_type canvas_item;
+//render_mode unshaded; // optional
+
+// Noise texture
+uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+// Fog density
+uniform float density: hint_range(0.0, 1.0) = 0.25;
+// Fog speed
+uniform vec2 speed = vec2(0.02, 0.01);
+
+
+// Called for every pixel the material is visible on
+void fragment() {
+	// Make the fog slowly move
+	vec2 uv = UV + speed * TIME;
+	// Sample the noise texture
+	float noise = texture(noise_texture, uv).r;
+	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
+	// and clamp it between 0.0 and 1.0 again
+	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	// Apply the fog effect
+	COLOR.a *= fog * density;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nfw1g"]
+noise_type = 3
+frequency = 0.0051
+offset = Vector3(0, 130.43, 0)
+fractal_lacunarity = 4.425
+fractal_gain = -0.075
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg28a"]
+noise = SubResource("FastNoiseLite_nfw1g")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhup6"]
+shader = SubResource("Shader_ci1dh")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_cg28a")
+shader_parameter/density = 0.6130000291175
+shader_parameter/speed = Vector2(0.08, 0.005)
+
+[sub_resource type="Gradient" id="Gradient_87xtp"]
+colors = PackedColorArray(0.059245825, 0.018844604, 0.25390625, 1, 0.6594744, 0.09338379, 0.796875, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oknvo"]
+gradient = SubResource("Gradient_87xtp")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_htnj5"]
+noise_type = 3
+offset = Vector3(0, 217.39, 0)
+fractal_lacunarity = 4.425
+fractal_gain = -0.075
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8jyd"]
+noise = SubResource("FastNoiseLite_htnj5")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8jyd"]
+shader = ExtResource("6_ir7v8")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_g8jyd")
+shader_parameter/density = 0.338000016055
+shader_parameter/speed = Vector2(0, -0.125)
+
+[sub_resource type="Gradient" id="Gradient_ci1dh"]
+colors = PackedColorArray(0.8984375, 0, 1, 1, 0.75045776, 0.13671875, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfw1g"]
+gradient = SubResource("Gradient_ci1dh")
+
+[node name="Main" type="Node2D" unique_id=403266150]
+process_mode = 3
+script = ExtResource("1_0xm2m")
+
+[node name="Pendulum" parent="." unique_id=296680403 instance=ExtResource("1_ig7tw")]
+
+[node name="Fall" type="AudioStreamPlayer" parent="Pendulum" unique_id=1692875050]
+stream = SubResource("AudioStreamRandomizer_hhup6")
+volume_db = -12.0
+bus = &"SFX"
+
+[node name="Award" type="AudioStreamPlayer" parent="Pendulum" unique_id=424046573]
+stream = SubResource("AudioStreamRandomizer_87xtp")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="UI" parent="." unique_id=1654169990 instance=ExtResource("4_8cpud")]
+
+[node name="Start" type="CharacterBody2D" parent="." unique_id=822448388 groups=["Stackable"]]
+z_index = 1
+position = Vector2(0, 461)
+script = ExtResource("3_h2yge")
+
+[node name="Collision" type="CollisionShape2D" parent="Start" unique_id=1504525013]
+position = Vector2(0, 97)
+shape = SubResource("RectangleShape2D_8cpud")
+
+[node name="ColorRect" type="ColorRect" parent="Start" unique_id=1639410439]
+visible = false
+offset_left = -125.0
+offset_right = 128.0
+offset_bottom = 250.0
+
+[node name="Road2" type="Sprite2D" parent="Start" unique_id=484778528]
+position = Vector2(-16, 9)
+texture = ExtResource("5_g8jyd")
+
+[node name="9" type="Sprite2D" parent="Start" unique_id=1076328784]
+position = Vector2(5.0000076, 147.12)
+scale = Vector2(0.395, 0.395)
+texture = ExtResource("6_ci1dh")
+
+[node name="StartTower" type="Sprite2D" parent="Start" unique_id=395926196]
+position = Vector2(4, -26.880005)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("7_nfw1g")
+
+[node name="Perfect" type="GPUParticles2D" parent="." unique_id=523897051]
+z_index = 2
+emitting = false
+amount = 12
+texture = ExtResource("5_3dqdr")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.3
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2yge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=408004579]
+layer = -1
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1682738239]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/Control" unique_id=1661338897]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -37317.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ir7v8")
+
+[node name="BG3" type="TextureRect" parent="CanvasLayer/Control" unique_id=264095635]
+unique_name_in_owner = true
+z_index = 2
+material = SubResource("ShaderMaterial_hhup6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_oknvo")
+
+[node name="BG2" type="TextureRect" parent="CanvasLayer/Control" unique_id=1660387205]
+unique_name_in_owner = true
+z_index = 2
+material = SubResource("ShaderMaterial_g8jyd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_nfw1g")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=8673024]
+layer = 5
+
+[node name="GameOver" parent="CanvasLayer2" unique_id=721595151 instance=ExtResource("10_ci1dh")]
+unique_name_in_owner = true
+visible = false

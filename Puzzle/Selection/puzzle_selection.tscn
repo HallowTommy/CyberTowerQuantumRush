@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bhy7h1oah6a17"]
+
+[ext_resource type="Script" uid="uid://de68nelxvouxi" path="res://Puzzle/Selection/puzzle_selection.gd" id="1_pbmg0"]
+[ext_resource type="Shader" uid="uid://2x3ov3cq1n6r" path="res://UI/Settings/panning.gdshader" id="2_3kess"]
+[ext_resource type="PackedScene" uid="uid://b14ufo20tjxsl" path="res://Puzzle/puzzle.tscn" id="3_llru1"]
+[ext_resource type="Texture2D" uid="uid://bk0hm6sblk5j5" path="res://Main/TowerTextures/BG.png" id="3_n1liq"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="4_btfsd"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="5_e0t8y"]
+[ext_resource type="Texture2D" uid="uid://o35r5hk17062" path="res://UI/Sprites/ButtonPressed.png" id="6_1ja77"]
+[ext_resource type="PackedScene" uid="uid://fwkonvffjddf" path="res://UI/money_label.tscn" id="8_e0t8y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2gjh"]
+shader = ExtResource("2_3kess")
+shader_parameter/direction = Vector2(0.5, 0.5)
+shader_parameter/speed = 0.5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xlf5w"]
+texture = ExtResource("5_e0t8y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gx68b"]
+texture = ExtResource("6_1ja77")
+
+[sub_resource type="GDScript" id="GDScript_3kess"]
+
+[node name="Puzzle" type="Control" unique_id=33617046]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_pbmg0")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=2147448397]
+material = SubResource("ShaderMaterial_l2gjh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_n1liq")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1351293462]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 175
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 175
+theme_override_constants/margin_bottom = 250
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer" unique_id=1470204670]
+layout_mode = 2
+
+[node name="SelectionContainer" type="GridContainer" parent="MarginContainer/Container" unique_id=646709009]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 3
+
+[node name="Back" type="Button" parent="MarginContainer/Container" unique_id=639098773]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("4_btfsd")
+theme_override_font_sizes/font_size = 73
+theme_override_styles/normal = SubResource("StyleBoxTexture_xlf5w")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gx68b")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xlf5w")
+text = "Main Menu"
+
+[node name="PuzzleContainer" parent="." unique_id=1481384531 instance=ExtResource("3_llru1")]
+layout_mode = 1
+mouse_filter = 1
+script = SubResource("GDScript_3kess")
+
+[node name="MoneyLabel" parent="." unique_id=1469629930 instance=ExtResource("8_e0t8y")]
+layout_mode = 1
+
+[connection signal="pressed" from="MarginContainer/Container/Back" to="." method="_on_back_pressed"]

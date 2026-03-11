@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://b28l8gujf6nxv"]
+
+[ext_resource type="Script" uid="uid://cs5ibh8nwj0q2" path="res://UI/Menu/Location/location.gd" id="1_jl2dr"]
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="2_ce52t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jl2dr"]
+
+[sub_resource type="Gradient" id="Gradient_p26n6"]
+offsets = PackedFloat32Array(0.32994923, 0.6243655, 0.70652175, 0.7817259, 1)
+colors = PackedColorArray(0.07696533, 0.10999012, 0.37890625, 0.3137255, 0.102479696, 0.0572052, 0.63671875, 0, 0.15234375, 0.03125, 1, 0, 0.03125, 0.0690918, 1, 0, 0.58374023, 0.03125, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wdkio"]
+gradient = SubResource("Gradient_p26n6")
+width = 128
+height = 192
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Location" type="MarginContainer" unique_id=427186763]
+custom_minimum_size = Vector2(720, 1330)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -742.0
+offset_right = 360.0
+offset_bottom = 742.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jl2dr")
+metadata/_edit_vertical_guides_ = [583.0]
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=761305592]
+material = SubResource("ShaderMaterial_jl2dr")
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_wdkio")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Texture" type="TextureRect" parent="." unique_id=443264211]
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ComingSoon!" type="Label" parent="." unique_id=1675750270]
+visible = false
+layout_mode = 2
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("2_ce52t")
+theme_override_font_sizes/font_size = 111
+text = "Coming
+Soon!"
+horizontal_alignment = 1

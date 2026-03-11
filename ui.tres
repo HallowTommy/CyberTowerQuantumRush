@@ -1,0 +1,22 @@
+[gd_resource type="Theme" format=3 uid="uid://cro62j845wrhq"]
+
+[ext_resource type="FontFile" uid="uid://dr1igv4tymcmg" path="res://Main/Towers/toxigenesis bd.otf" id="1_iokc4"]
+[ext_resource type="Texture2D" uid="uid://bfbnhj0stts83" path="res://UI/Sprites/Button.png" id="2_1em5h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uone7"]
+texture = ExtResource("2_1em5h")
+modulate_color = Color(0.7313547, 0.6954346, 0.84375, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3s7v7"]
+texture = ExtResource("2_1em5h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nr8cx"]
+texture = ExtResource("2_1em5h")
+modulate_color = Color(0.29223633, 0.2957878, 0.51953125, 1)
+
+[resource]
+Button/font_sizes/font_size = 70
+Button/fonts/font = ExtResource("1_iokc4")
+Button/styles/hover = SubResource("StyleBoxTexture_uone7")
+Button/styles/normal = SubResource("StyleBoxTexture_3s7v7")
+Button/styles/pressed = SubResource("StyleBoxTexture_nr8cx")
