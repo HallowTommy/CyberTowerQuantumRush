@@ -1,18 +1,8 @@
 extends Control
 
-func _ready() -> void:
+func _ready():
 	await get_tree().process_frame
-	AudioServer.set_bus_mute(0, true)
-
-	Webview.open("https://google.com", {
-		"fullscreen": true,
-		"close_delay": 2,
-		"show_loader": true
-	})
-
-	Webview.closed.connect(func():
-		AudioServer.set_bus_mute(0, false)
-	)
+	Webview.open("https://example.com")
 
 func _on_play_pressed() -> void:
 	SceneTransition._change_scene("res://UI/Menu/Location/locations.tscn")
