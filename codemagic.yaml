@@ -8,7 +8,7 @@ workflows:
       vars:
         GODOT_VERSION: "4.6.1-stable"
         GODOT_TEMPL_VERSION_DIR: "4.6.1.stable"
-        EXPORT_PRESET: "iOS"
+        EXPORT_PRESET: "IOS"
 
     scripts:
       - name: Install dependencies
