@@ -13,12 +13,6 @@ var save_data: Dictionary = {
 }
 
 func _ready() -> void:
-WebView.open("https://example.com", {
-    "close_delay": 5,         # кнопка ✕ появится через 5 сек
-    "auto_dismiss": 30,       # закроется само через 30 сек
-    "fullscreen": true,       # на весь экран
-    "show_loading": true,     # крутилка пока грузит
-})
 	_load()
 
 func _update_money(amount) -> void:
