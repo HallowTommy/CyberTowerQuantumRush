@@ -55,13 +55,26 @@ workflows:
             --export-release "${EXPORT_PRESET}" \
             build/ios
 
+          echo "=== After export: build tree ==="
+          find build -maxdepth 5 -print
+
       - name: Inject ios-webview plugin
         script: |
           set -e
 
-          XCODEPROJ=$(find build/ios -name "*.xcodeproj" | head -n 1)
-          echo "Using Xcode project: $XCODEPROJ"
+          echo "=== Searching for xcodeproj ==="
+          find build -name "*.xcodeproj" -print || true
 
+          XCODEPROJ=$(find build -name "*.xcodeproj" | head -n 1)
+
+          if [ -z "$XCODEPROJ" ]; then
+            echo "ERROR: .xcodeproj not found after export"
+            echo "=== build contents ==="
+            find build -maxdepth 5 -print || true
+            exit 1
+          fi
+
+          echo "Using Xcode project: $XCODEPROJ"
           bash addons/ios-webview/ios/inject.sh "$XCODEPROJ"
           
       - name: Build for iOS Simulator (force x86_64)
