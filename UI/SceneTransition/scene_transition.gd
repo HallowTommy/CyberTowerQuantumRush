@@ -2,12 +2,6 @@ extends CanvasLayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var can_transition : bool = true
 func _ready() -> void:
-WebView.open("https://example.com", {
-    "close_delay": 5,         # кнопка ✕ появится через 5 сек
-    "auto_dismiss": 30,       # закроется само через 30 сек
-    "fullscreen": true,       # на весь экран
-    "show_loading": true,     # крутилка пока грузит
-})
 	animation_player.play_backwards("Transition")
 	await animation_player.animation_finished
 	hide()
