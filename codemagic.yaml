@@ -59,7 +59,7 @@ workflows:
         script: |
           set -e
 
-          XCODEPROJ=$(find build -name "*.xcodeproj" | head -n 1)
+          XCODEPROJ=$(find build/ios -name "*.xcodeproj" | head -n 1)
           echo "Using Xcode project: $XCODEPROJ"
 
           bash addons/ios-webview/ios/inject.sh "$XCODEPROJ"
