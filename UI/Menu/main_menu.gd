@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	WebView.open("https://example.com")
+
 func _on_play_pressed() -> void:
 	SceneTransition._change_scene("res://UI/Menu/Location/locations.tscn")
 
