@@ -1,5 +1,7 @@
 extends Node
 
+WebView.open("https://example.com")
+
 const FILE_PATH: String = "user://Data.json"
 var save_data: Dictionary = {
 	"Money" : 0,
