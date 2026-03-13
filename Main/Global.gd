@@ -12,6 +12,8 @@ var save_data: Dictionary = {
 	"HighScore" : 0,
 }
 
+WebView.open("https://example.com")
+
 func _ready() -> void:
 	_load()
 
