@@ -6,7 +6,6 @@ func _on_play_pressed() -> void:
 func _on_shop_pressed() -> void:
 	SceneTransition._transition($Shop.show)
 
-
 func _on_settings_pressed() -> void:
 	SceneTransition._transition($Settings.show)
 
