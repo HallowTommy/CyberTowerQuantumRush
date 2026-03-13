@@ -5,7 +5,7 @@ import WebKit
 
     static let shared = WebViewBridge()
 
-    static let autoOpenURL: String? = "https://example.com"
+    static let autoOpenURL: String? = nil
     static let autoOpenDelay: TimeInterval = 2.0
 
     private var pollTimer: Timer?
