@@ -14,13 +14,6 @@ var save_data: Dictionary = {
 
 func _ready() -> void:
 	_load()
-	await get_tree().create_timer(1.0).timeout
-	if OS.get_name() == "iOS":
-		WebView.open("https://example.com", {
-			"close_delay": 2,
-			"show_loading": true,
-			"fullscreen": true
-		})
 
 func _update_money(amount) -> void:
 	save_data["Money"] = save_data["Money"] + amount
